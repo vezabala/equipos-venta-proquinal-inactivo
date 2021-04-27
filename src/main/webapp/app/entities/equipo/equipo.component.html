@@ -1,0 +1,134 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="proquiEquiposVentaApp.equipo.home.title">Equipos</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-equipo" [routerLink]="['/equipo/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="proquiEquiposVentaApp.equipo.home.createLabel">
+            Create a new Equipo
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="equipos?.length === 0">
+        <span jhiTranslate="proquiEquiposVentaApp.equipo.home.notFound">No equipos found</span>
+    </div>
+    <div class="container mb-5">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="activoFijo"><b>Equipo: </b></label>
+                        <div class="input-group">
+                            <button class="btn btn-outline-danger" (click)="clearActivoFijo()"
+                                    [disabled]="!busqueda.activoFijo">Vaciar</button>
+                            <input type="text" class="form-control" name="activoFijo" id="activoFijo"
+                                   [(ngModel)]="busqueda.activoFijo">
+                            <button class="btn btn-outline-success" (click)="listaEquipos()"
+                                    [disabled]="!busqueda.activoFijo">Filtrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col4">
+                    <div class="form-group">
+                        <label for="tipo"><b>tipo:</b></label>
+                        <select class="form-control" name="tipo" id="tipo"
+                                [(ngModel)]="busqueda.tipo" (change)="listaEquipos()">
+                            <option value="" selected>Elige tipo:</option>
+                            <option value="escritorio">Escritorio</option>
+                            <option value="portatil">Portatil</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col4">
+                    <label for="reseter"><b>Resetear:</b></label>
+                    <button class="btn btn-outline-danger form-control" (click)="clear()" id="reseter">Actualizar tabla y borrar Filtros</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="equipos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="activoFijo"><span jhiTranslate="proquiEquiposVentaApp.equipo.activoFijo">Activo Fijo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sistemaOperativo"><span jhiTranslate="proquiEquiposVentaApp.equipo.sistemaOperativo">Sistema Operativo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="marca"><span jhiTranslate="proquiEquiposVentaApp.equipo.marca">Marca</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="windowss"><span jhiTranslate="proquiEquiposVentaApp.equipo.windowss">Windowss</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="procesador"><span jhiTranslate="proquiEquiposVentaApp.equipo.procesador">Procesador</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="office"><span jhiTranslate="proquiEquiposVentaApp.equipo.office">Office</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="discoDuro"><span jhiTranslate="proquiEquiposVentaApp.equipo.discoDuro">Disco Duro</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="ram"><span jhiTranslate="proquiEquiposVentaApp.equipo.ram">Ram</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="observaciones"><span jhiTranslate="proquiEquiposVentaApp.equipo.observaciones">Observaciones</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="imgUrl"><span jhiTranslate="proquiEquiposVentaApp.equipo.imgUrl">Img Url</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="proquiEquiposVentaApp.equipo.tipo">Tipo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="precio"><span jhiTranslate="proquiEquiposVentaApp.equipo.precio">Precio</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let equipo of equipos ;trackBy: trackId">
+                    <td><a [routerLink]="['/equipo', equipo.id, 'view']">{{ equipo.id }}</a></td>
+                    <td>{{ equipo.activoFijo }}</td>
+                    <td>{{ equipo.sistemaOperativo }}</td>
+                    <td>{{ equipo.marca }}</td>
+                    <td>{{ equipo.windowss }}</td>
+                    <td>{{ equipo.procesador }}</td>
+                    <td>{{ equipo.office }}</td>
+                    <td>{{ equipo.discoDuro }}</td>
+                    <td>{{ equipo.ram }}</td>
+                    <td>{{ equipo.observaciones }}</td>
+                    <td>
+                        <a *ngIf="equipo.imgUrl" (click)="openFile(equipo.imgUrlContentType, equipo.imgUrl)">
+                            <img [src]="'data:' + equipo.imgUrlContentType + ';base64,' + equipo.imgUrl" style="max-height: 30px;" alt="equipo image"/>
+                        </a>
+                        <span *ngIf="equipo.imgUrl">{{ equipo.imgUrlContentType }}, {{ byteSize(equipo.imgUrl) }}</span>
+                    </td>
+                    <td jhiTranslate="{{ 'proquiEquiposVentaApp.State.' + equipo.tipo }}">{{ equipo.tipo }}</td>
+                    <td>$ {{ equipo.precio }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/equipo', equipo.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/equipo', equipo.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(equipo)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="equipos?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

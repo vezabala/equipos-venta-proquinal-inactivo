@@ -1,0 +1,28 @@
+{
+  "proquiEquiposVentaApp": {
+    "usuario": {
+      "home": {
+        "title": "Usuarios",
+        "createLabel": "Crear nuevo Usuario",
+        "createOrEditLabel": "Crear o editar Usuario",
+        "notFound": "Ningún Usuarios encontrado"
+      },
+      "created": "Un nuevo Usuario ha sido creado con el identificador {{ param }}",
+      "updated": "Un Usuario ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Usuario ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Usuario {{ id }}?"
+      },
+      "detail": {
+        "title": "Usuario"
+      },
+      "numeroDocumento": "codigo",
+      "nombres": "Nombre completos",
+      "apellidos": "extensión",
+      "correo": "Correo",
+      "area": "Area",
+      "equipo": "Activo Fijo",
+      "actFijo": "Elija el Equipo (puede ir escribiendo el equipo y se autocompleta)"
+    }
+  }
+}

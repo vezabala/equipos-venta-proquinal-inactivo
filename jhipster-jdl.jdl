@@ -1,0 +1,33 @@
+enum State{
+	EQUIPO,
+    PORTATIL
+}
+entity Usuario{
+	numeroDocumento String  required maxlength(255),
+    nombres String required maxlength(50),
+    apellidos String required maxlength(50),
+    correo String required maxlength(50),
+    area String required maxlength(50)
+}
+entity Equipo{
+	activoFijo String required  maxlength(70) unique,
+    marca String required  maxlength(70),
+    procesador String required  maxlength(200),
+    office String required  maxlength(70),
+    sistemaOperativo String required  maxlength(70),
+    discoDuro String required  maxlength(70),
+    ram String required  maxlength(70),
+    observaciones String maxlength(200),
+   	imgUrl ImageBlob,
+    tipo State required
+}
+relationship OneToMany {
+	Equipo{usuarios} to Usuario{equipo(activoFijo) required}
+}
+dto * with mapstruct
+service * with serviceClass
+paginate  * with pagination
+//search * with elasticsearch
+
+
+

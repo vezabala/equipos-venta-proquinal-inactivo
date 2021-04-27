@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span>Equipos portatiles</span>
+    </h2>
+
+    <div class="container mb-5">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="activoFijo"><b>Nombre de equipo:</b></label>
+                        <div class="input-group">
+                            <button class="btn btn-outline-danger" (click)="clearActivoFijo()"
+                                    [disabled]="!busqueda.activoFijo">Vaciar</button>
+                            <input type="text" class="form-control" name="activoFijo" id="activoFijo"
+                                   [(ngModel)]="busqueda.activoFijo">
+                            <button class="btn btn-outline-success" (click)="listaEquiposP()"
+                                    [disabled]="!busqueda.activoFijo">Filtrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col4">
+                    <label for="reseter"><b>Resetear:</b></label>
+                    <button class="btn btn-outline-danger form-control" (click)="clear()" id="reseter">Actualizar tabla y borrar Filtros</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="equipos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="activoFijo"><span jhiTranslate="proquiEquiposVentaApp.equipo.activoFijo">Activo Fijo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="marca"><span jhiTranslate="proquiEquiposVentaApp.equipo.marca">Marca</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="windowss"><span jhiTranslate="proquiEquiposVentaApp.equipo.windowss">Windowss</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="proquiEquiposVentaApp.equipo.tipo">Tipo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="discoDuro"><span jhiTranslate="proquiEquiposVentaApp.equipo.discoDuro">Disco Duro</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="ram"><span jhiTranslate="proquiEquiposVentaApp.equipo.ram">Ram</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="precio"><span jhiTranslate="proquiEquiposVentaApp.equipo.precio">Precio</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let equipo of equipos ;trackBy: trackId">
+                    <td><a [routerLink]="['/equipoPortatil', equipo.id, 'view']">{{ equipo.id }}</a></td>
+                    <td>{{ equipo.activoFijo }}</td>
+                    <td>{{ equipo.marca }}</td>
+                    <td>{{ equipo.windowss }}</td>
+                    <td jhiTranslate="{{ 'proquiEquiposVentaApp.State.' + equipo.tipo }}">{{ equipo.tipo }}</td>
+                    <td>{{ equipo.discoDuro }}</td>
+                    <td>{{ equipo.ram }}</td>
+                    <td>$ {{ equipo.precio }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="button"
+                                    [routerLink]="['/equipoPortatil', equipo.id, 'view']"
+                                    class="btn btn-info" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.viewEscritorio">View</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="equipos?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

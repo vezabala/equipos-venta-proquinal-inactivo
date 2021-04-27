@@ -1,0 +1,214 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-equipo-heading" jhiTranslate="proquiEquiposVentaApp.equipo.home.createOrEditLabel">Create or edit a Equipo</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="proquiEquiposVentaApp.equipo.activoFijo" for="field_activoFijo">Activo Fijo</label>
+                    <input type="text" class="form-control" name="activoFijo" id="field_activoFijo"
+                           formControlName="activoFijo"/>
+                    <div *ngIf="editForm.get('activoFijo')!.invalid && (editForm.get('activoFijo')!.dirty || editForm.get('activoFijo')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('activoFijo')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('activoFijo')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 70 }">
+                        This field cannot be longer than 70 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="proquiEquiposVentaApp.equipo.sistemaOperativo" for="field_sistemaOperativo">Sistema Operativo</label>
+                    <input type="text" class="form-control" name="sistemaOperativo" id="field_sistemaOperativo"
+                           formControlName="sistemaOperativo"/>
+                    <div *ngIf="editForm.get('sistemaOperativo')!.invalid && (editForm.get('sistemaOperativo')!.dirty || editForm.get('sistemaOperativo')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sistemaOperativo')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sistemaOperativo')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 70 }">
+                            This field cannot be longer than 70 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="proquiEquiposVentaApp.equipo.marca" for="field_marca">Marca</label>
+                    <input type="text" class="form-control" name="marca" id="field_marca"
+                           formControlName="marca"/>
+                    <div *ngIf="editForm.get('marca')!.invalid && (editForm.get('marca')!.dirty || editForm.get('marca')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('marca')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('marca')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 70 }">
+                        This field cannot be longer than 70 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="proquiEquiposVentaApp.equipo.windowss" for="field_windowss">Windowss</label>
+                    <input type="text" class="form-control" name="windowss" id="field_windowss"
+                           formControlName="windowss"/>
+                    <div *ngIf="editForm.get('windowss')!.invalid && (editForm.get('windowss')!.dirty || editForm.get('windowss')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('windowss')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('windowss')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 70 }">
+                            This field cannot be longer than 70 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="proquiEquiposVentaApp.equipo.procesador" for="field_procesador">Procesador</label>
+                    <input type="text" class="form-control" name="procesador" id="field_procesador"
+                           formControlName="procesador"/>
+                    <div *ngIf="editForm.get('procesador')!.invalid && (editForm.get('procesador')!.dirty || editForm.get('procesador')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('procesador')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('procesador')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                        This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="proquiEquiposVentaApp.equipo.office" for="field_office">Office</label>
+                    <input type="text" class="form-control" name="office" id="field_office"
+                           formControlName="office"/>
+                    <div *ngIf="editForm.get('office')!.invalid && (editForm.get('office')!.dirty || editForm.get('office')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('office')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('office')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 70 }">
+                        This field cannot be longer than 70 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="proquiEquiposVentaApp.equipo.discoDuro" for="field_discoDuro">Disco Duro</label>
+                    <input type="text" class="form-control" name="discoDuro" id="field_discoDuro"
+                           formControlName="discoDuro"/>
+                    <div *ngIf="editForm.get('discoDuro')!.invalid && (editForm.get('discoDuro')!.dirty || editForm.get('discoDuro')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('discoDuro')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('discoDuro')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 70 }">
+                        This field cannot be longer than 70 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="proquiEquiposVentaApp.equipo.ram" for="field_ram">Ram</label>
+                    <input type="text" class="form-control" name="ram" id="field_ram"
+                           formControlName="ram"/>
+                    <div *ngIf="editForm.get('ram')!.invalid && (editForm.get('ram')!.dirty || editForm.get('ram')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('ram')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('ram')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 70 }">
+                        This field cannot be longer than 70 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="proquiEquiposVentaApp.equipo.observaciones" for="field_observaciones">Observaciones</label>
+                    <input type="text" class="form-control" name="observaciones" id="field_observaciones"
+                           formControlName="observaciones"/>
+                    <div *ngIf="editForm.get('observaciones')!.invalid && (editForm.get('observaciones')!.dirty || editForm.get('observaciones')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('observaciones')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                        This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="proquiEquiposVentaApp.equipo.imgUrl" for="field_imgUrl">Img Url</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('imgUrlContentType')!.value + ';base64,' + editForm.get('imgUrl')!.value" style="max-height: 100px;" *ngIf="editForm.get('imgUrl')!.value" alt="equipo image"/>
+                        <div *ngIf="editForm.get('imgUrl')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('imgUrlContentType')!.value }}, {{ byteSize(editForm.get('imgUrl')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('imgUrl', 'imgUrlContentType', 'file_imgUrl')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_imgUrl" (change)="setFileData($event, 'imgUrl', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="imgUrl" id="field_imgUrl"
+                           formControlName="imgUrl"/>
+                    <input type="hidden" class="form-control" name="imgUrlContentType" id="field_imgUrlContentType"
+                           formControlName="imgUrlContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="proquiEquiposVentaApp.equipo.tipo" for="field_tipo">Tipo</label>
+                    <select class="form-control" name="tipo" formControlName="tipo" id="field_tipo">
+                        <option value="ESCRITORIO">{{ 'proquiEquiposVentaApp.State.ESCRITORIO' | translate }}</option>
+                        <option value="PORTATIL">{{ 'proquiEquiposVentaApp.State.PORTATIL' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('tipo')!.invalid && (editForm.get('tipo')!.dirty || editForm.get('tipo')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('tipo')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="proquiEquiposVentaApp.equipo.precio" for="field_precio">Precio</label>
+                    <input type="text" class="form-control" name="precio" id="field_precio"
+                           formControlName="precio"/>
+                    <div *ngIf="editForm.get('precio')!.invalid && (editForm.get('precio')!.dirty || editForm.get('precio')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('precio')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('precio')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 70 }">
+                        This field cannot be longer than 70 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-3">
+        <span class="hipster img-fluid rounded"></span>
+    </div>
+
+    <div class="col-md-9">
+        <h1 class="display-4" jhiTranslate="home.title">Equipos Venta</h1>
+
+        <p class="lead">Gracias por participar, el tiempo de inscripcion termino, esté atento a los resultados</p>
+
+        <div [ngSwitch]="isAuthenticated()">
+            <div class="alert alert-success" *ngSwitchCase="true">
+                <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message"
+                    [translateValues]="{ username: account.login }">You are logged in as user "{{ account.login }}".</span>
+            </div>
+        </div>
+        <div>
+            <img class="escritorio" src="../../content/images/escritorio.jpg">
+            <img class="portatil" src="../../content/images/portatil.jpg">
+            <style>
+                .escritorio {padding: 10px; margin: 10px;
+                    border: 2px; float: left; width:250px; height:250px}
+                .portatil {padding: 10px; margin: 20px;
+                    border: 2px; float: left; width:250px; height:250px}
+            </style>
+        </div>
+    </div>
+</div>

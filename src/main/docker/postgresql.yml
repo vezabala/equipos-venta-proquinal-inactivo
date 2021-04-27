@@ -1,0 +1,11 @@
+version: '2'
+services:
+  proquiequiposventa-postgresql:
+    image: postgres:12.1
+    # volumes:
+    #     - ~/volumes/jhipster/ProquiEquiposVenta/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=ProquiEquiposVenta
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432

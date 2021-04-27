@@ -1,0 +1,127 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="proquiEquiposVentaApp.usuario.home.title">Usuarios</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-usuario" [routerLink]="['/usuario/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="proquiEquiposVentaApp.usuario.home.createLabel">
+            Create a new Usuario
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="usuarios?.length === 0">
+        <span jhiTranslate="proquiEquiposVentaApp.usuario.home.notFound">No usuarios found</span>
+    </div>
+
+    <div class="container mb-5">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="numeroDocumento"><b>codigo :</b></label>
+                        <div class="input-group">
+                            <button class="btn btn-outline-danger" (click)="clearNumeroDocumento()"
+                                    [disabled]="!busqueda.numeroDocumento">Vaciar</button>
+                            <input type="text" class="form-control" name="numeroDocumento" id="numeroDocumento"
+                                   [(ngModel)]="busqueda.numeroDocumento">
+                            <button class="btn btn-outline-success" (click)="listaUsuarios()"
+                                    [disabled]="!busqueda.numeroDocumento">Filtrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="equipoElegido"><b>Equipo:</b></label>
+                        <select class="form-control" name="equipoElegido" id="equipoElegido"
+                                [(ngModel)]="equipoElegido" (change)="onChangeEsuario()">
+                            <option [ngValue]="null" selected>Elige Activo Fijo (se puede escribir y se va filtrando)</option>
+                            <option [ngValue]="equipo" *ngFor="let equipo of equipos">{{equipo.activoFijo}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col4">
+                    <label for="reseter"><b>Resetear:</b></label>
+                    <button class="btn btn-outline-danger form-control" (click)="clear()" id="reseter">Actualizar tabala y borrar Filtros</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class=""col4>
+                    <div>
+                        <label><b>Excel click para descargar:</b></label>
+                        <div>
+                            <button type="submit" class="btn btn-info btn-sm" (click)="exportexcel()">Descargar archivo excel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="usuarios?.length > 0">
+        <table class="table table-striped" id="excel-table" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="numeroDocumento"><span jhiTranslate="proquiEquiposVentaApp.usuario.numeroDocumento">Codigo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nombres"><span jhiTranslate="proquiEquiposVentaApp.usuario.nombres">Nombres</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="apellidos"><span jhiTranslate="proquiEquiposVentaApp.usuario.apellidos">Apellidos</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="area"><span jhiTranslate="proquiEquiposVentaApp.usuario.area">Area</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="equipoActivoFijo"><span jhiTranslate="proquiEquiposVentaApp.usuario.equipo">Equipo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuariosList ;">
+                    <td><a [routerLink]="['/usuario', usuario.id, 'view']">{{ usuario.id }}</a></td>
+                    <td>{{ usuario.numeroDocumento }}</td>
+                    <td>{{ usuario.nombres }}</td>
+                    <td>{{ usuario.apellidos }}</td>
+                    <td>{{ usuario.area }}</td>
+                    <td>{{usuario.equipo.sistemaOperativo}}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/usuario', usuario.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/usuario', usuario.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(usuario)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="usuarios?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+{
+  "proquiEquiposVentaApp": {
+    "equipo": {
+      "home": {
+        "title": "Equipos",
+        "createLabel": "Crear nuevo Equipo",
+        "createOrEditLabel": "Crear o editar Equipo",
+        "notFound": "Ningún Equipos encontrado"
+      },
+      "created": "Un nuevo Equipo ha sido creado con el identificador {{ param }}",
+      "updated": "Un Equipo ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Equipo ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Equipo {{ id }}?"
+      },
+      "detail": {
+        "title": "Equipo"
+      },
+      "activoFijo": "Nombre equipo",
+      "marca": "Marca",
+      "procesador": "Procesador",
+      "office": "Office",
+      "sistemaOperativo": "activo fijo",
+      "discoDuro": "Disco Duro",
+      "ram": "Ram",
+      "observaciones": "Observaciones",
+      "imgUrl": "Img Url",
+      "tipo": "Tipo",
+      "windowss": "Windows",
+      "precio": "Precio",
+      "usuarios": "Usuarios"
+    }
+  }
+}

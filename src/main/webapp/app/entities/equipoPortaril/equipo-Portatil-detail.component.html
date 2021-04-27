@@ -1,0 +1,87 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="equipo">
+            <h2>Portatil {{ equipo.activoFijo }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+
+                <dd>
+                    <div *ngIf="equipo.imgUrl">
+                        <a (click)="openFile(equipo?.imgUrlContentType!, equipo?.imgUrl)">
+                            <img [src]="'data:' + equipo.imgUrlContentType + ';base64,' + equipo.imgUrl" style= "float:right; max-width: 80%;" alt="equipo image"/>
+                        </a>
+                        {{ equipo.imgUrlContentType }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="proquiEquiposVentaApp.equipo.activoFijo">Activo Fijo</span></dt>
+                <dd>
+                    <span>{{ equipo.activoFijo }}</span>
+                </dd>
+                <dt><span jhiTranslate="proquiEquiposVentaApp.equipo.sistemaOperativo">Sistema Operativo</span></dt>
+                <dd>
+                    <span>{{ equipo.sistemaOperativo }}</span>
+                </dd>
+                <dt><span jhiTranslate="proquiEquiposVentaApp.equipo.marca">Marca</span></dt>
+                <dd>
+                    <span>{{ equipo.marca }}</span>
+                </dd>
+                <dt><span jhiTranslate="proquiEquiposVentaApp.equipo.windowss">Windowss</span></dt>
+                <dd>
+                    <span>{{ equipo.windowss }}</span>
+                </dd>
+                <dt><span jhiTranslate="proquiEquiposVentaApp.equipo.procesador">Procesador</span></dt>
+                <dd>
+                    <span>{{ equipo.procesador }}</span>
+                </dd>
+                <dt><span jhiTranslate="proquiEquiposVentaApp.equipo.office">Office</span></dt>
+                <dd>
+                    <span>{{ equipo.office }}</span>
+                </dd>
+                <div class="volver">
+                    <h2>
+                        <dt><span jhiTranslate="proquiEquiposVentaApp.equipo.precio">Precio</span></dt>
+                    </h2>
+                    <dd>
+                        <h2>
+                            <span>$ {{ equipo.precio }}</span>
+                        </h2>
+                    </dd>
+                    <dt><span>Ten en cuenta el nombre del equipo ({{ equipo.activoFijo }}) para inscripcion</span></dt>
+                    <button type="submit"
+                            (click)="previousState()"
+                            class="btn btn-danger" >
+                        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                    </button>
+                    <button type="submit"
+                            [routerLink]="['/equipoPortatil', equipo.id, 'newusuario']"
+                            class="btn btn-info" >
+                        <span>Inscribirme</span>
+                    </button>
+                </div>
+                <dt><span jhiTranslate="proquiEquiposVentaApp.equipo.discoDuro">Disco Duro</span></dt>
+                <dd>
+                    <span>{{ equipo.discoDuro }}</span>
+                </dd>
+                <dt><span jhiTranslate="proquiEquiposVentaApp.equipo.ram">Ram</span></dt>
+                <dd>
+                    <span>{{ equipo.ram }}</span>
+                </dd>
+                <dt><span jhiTranslate="proquiEquiposVentaApp.equipo.observaciones">Observaciones</span></dt>
+                <dd>
+                    <span>{{ equipo.observaciones }}</span>
+                </dd>
+                <dt><span jhiTranslate="proquiEquiposVentaApp.equipo.tipo">Tipo</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'proquiEquiposVentaApp.State.' + equipo.tipo }}">{{ equipo.tipo }}</span>
+                </dd>
+            </dl>
+            <style>
+                .volver {float: right;}
+            </style>
+        </div>
+    </div>
+</div>
